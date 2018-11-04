@@ -36,11 +36,11 @@ bigint_t *bigint_add(bigint_t *a, bigint_t *b, char base)
 	if (!a || !b)
 		return (0);
 	if (a->neg && b->neg)
-		return (bigint_invert(
-			bigint_add(bigint_invert(a), bigint_invert(b), base)));
+		return (bigint_invert(bigint_add(
+			bigint_invert(a), bigint_invert(b), base)));
 	if (a->neg)
-		return (bigint_sub(b, a, base));
+		return (bigint_sub(b, bigint_invert(a), base));
 	if (b->neg)
-		return (bigint_sub(a, b, base));
+		return (bigint_sub(a, bigint_invert(b), base));
 	return (add_pos(a, b, base));
 }

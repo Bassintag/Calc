@@ -12,7 +12,7 @@ static bigint_t *div_pos(bigint_t *a, bigint_t *b, char base)
 	if (!i || !one)
 		return (0);
 	one->value[0] = 1;
-	while (bigint_compare(a, b) > 0) {
+	while (bigint_compare(a, b) >= 0) {
 		a = bigint_sub(a, b, base);
 		i = bigint_add(i, one, base);
 		if (!a || !i)

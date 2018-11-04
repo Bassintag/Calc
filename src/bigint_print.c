@@ -9,6 +9,10 @@ void bigint_print(const expr_t *expr, const bigint_t *num)
 {
 	int i = 0;
 
+	if (bigint_zero(num)) {
+		putchar(expr->base[0]);
+		return;
+	}
 	if (num->neg)
 		putchar('-');
 	for (; i < num->len - 1 && num->value[i] == 0; i += 1);

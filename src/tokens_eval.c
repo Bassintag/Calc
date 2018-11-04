@@ -22,7 +22,7 @@ static bigint_t *factor(const expr_t *e, list_t **tokens, char base)
 		return (bigint_invert(
 			factor(e, tokens_advance(tokens), base)));
 	else if (tokens_type(*tokens) == TKN_ADD)
-		return (factor(e, &((*tokens)->next), base));
+		return (factor(e, tokens_advance(tokens), base));
 	else if (tokens_type(*tokens) == TKN_NUM) {
 		num = (bigint_parse(e, (char *) tokens_value(*tokens)));
 		tokens_advance(tokens);

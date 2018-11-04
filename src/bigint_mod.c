@@ -6,7 +6,7 @@
 
 static bigint_t *mod_pos(bigint_t *a, bigint_t *b, char base)
 {
-	while (bigint_compare(a, b) > 0) {
+	while (bigint_compare(a, b) >= 0) {
 		a = bigint_sub(a, b, base);
 		if (!a)
 			return (NULL);

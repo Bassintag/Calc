@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <memory.h>
+#include <string.h>
+#include <unistd.h>
 #include "bistro.h"
 
 static int parse_operators(expr_t *out, char *str)
@@ -17,15 +18,25 @@ static int parse_operators(expr_t *out, char *str)
 	return (0);
 }
 
-int main()
+int main(int ac, char *av[])
 {
 	expr_t expr;
 	bigint_t out;
+	int len;
 	char *err;
 
-	expr.value = "123%10";
-	expr.base = "0123456789";
-	parse_operators(&expr, "+-*/%()");
+	if (ac != 4)
+		return (84);
+	expr.base = av[1];
+	if (parse_operators(&expr, av[2]))
+		return (84);
+	len = atoi(av[3]);
+	if (len <= 0)
+		return (84);
+	expr.value = malloc(sizeof(char) * len + 1);
+	if (read(0, expr.value, (size_t) len) != len)
+		return (84);
+	expr.value[len] = '\0';
 	err = calc(&expr, &out);
 	if (err) {
 		puts(err);

@@ -12,10 +12,11 @@ static bigint_t *mul_pos(bigint_t *a, bigint_t *b, char base)
 	for (size_t i_a = 1; i_a <= a->len; i_a += 1) {
 		for (size_t i_b = 1; i_b <= b->len; i_b += 1) {
 			idx = num->len - (i_a + i_b - 1);
-			num->value[idx] += a->value[a->len - i_a] *
-				b->value[b->len - i_b];
-			num->value[idx - 1] += num->value[idx] / base;
-			num->value[idx] %= base;
+			for (char i = 0; i < b->value[b->len - i_b]; i += 1) {
+				num->value[idx] += a->value[a->len - i_a];
+				num->value[idx - 1] += num->value[idx] / base;
+				num->value[idx] %= base;
+			}
 		}
 	}
 	return (num);

@@ -5,13 +5,13 @@
 #include <string.h>
 #include "bistro.h"
 
-static int number(const char *src, list_t **out, size_t *len)
+static int number(const expr_t *expr, const char *src, list_t **out, size_t *len)
 {
 	char *value;
 	token_t *token;
 
 	*len = 0;
-	while (src[*len] >= '0' && src[*len] <= '9')
+	while (src[*len] && strchr(expr->base, src[*len]) != NULL)
 		*len += 1;
 	if (*len) {
 		value = strndup(src, *len);
@@ -75,7 +75,7 @@ static int next_token(const expr_t *expr, char const **src, list_t **out)
 		*src += 1;
 		return (0);
 	}
-	if (number(*src, out, &len))
+	if (number(expr, *src, out, &len))
 		return (84);
 	else if (len) {
 		*src += len;
