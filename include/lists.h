@@ -6,8 +6,8 @@
 #define BISTRO_LISTS_H
 
 typedef struct list_s {
-    struct list_s *next;
-    void *value;
+	struct list_s *next;
+	void *value;
 } list_t;
 
 list_t *list_create(void *);

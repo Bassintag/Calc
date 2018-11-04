@@ -4,7 +4,8 @@
 
 #include "bistro.h"
 
-list_t **tokens_advance(list_t **tokens) {
-    *tokens = (*tokens)->next;
-    return tokens;
+list_t **tokens_advance(list_t **tokens)
+{
+	*tokens = (*tokens)->next;
+	return tokens;
 }

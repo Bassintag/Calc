@@ -11,37 +11,37 @@
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 
 typedef struct bigint_s {
-    char *value;
-    size_t len;
-    char neg;
+	char *value;
+	size_t len;
+	char neg;
 } bigint_t;
 
 typedef struct expr_s {
-    char *value;
-    char *base;
-    char add_op;
-    char sub_op;
-    char mul_op;
-    char div_op;
-    char mod_op;
-    char lpr_op;
-    char rpr_op;
+	char *value;
+	char *base;
+	char add_op;
+	char sub_op;
+	char mul_op;
+	char div_op;
+	char mod_op;
+	char lpr_op;
+	char rpr_op;
 } expr_t;
 
 typedef enum token_type_e {
-    TKN_NUM,
-    TKN_ADD,
-    TKN_SUB,
-    TKN_MUL,
-    TKN_DIV,
-    TKN_MOD,
-    TKN_LPR,
-    TKN_RPR,
+	TKN_NUM,
+	TKN_ADD,
+	TKN_SUB,
+	TKN_MUL,
+	TKN_DIV,
+	TKN_MOD,
+	TKN_LPR,
+	TKN_RPR,
 } token_type_t;
 
 typedef struct token_s {
-    const char *value;
-    token_type_t type;
+	const char *value;
+	token_type_t type;
 } token_t;
 
 char *calc(const expr_t *expr, bigint_t *out);
@@ -66,6 +66,7 @@ bigint_t *bigint_sub(bigint_t *a, bigint_t *b, char base);
 bigint_t *bigint_mul(bigint_t *a, bigint_t *b, char base);
 bigint_t *bigint_div(bigint_t *a, bigint_t *b, char base);
 bigint_t *bigint_mod(bigint_t *a, bigint_t *b, char base);
-bigint_t *bigint_simplify_neg(bigint_t *a, bigint_t *b, char base, bigint_t *(*)(bigint_t *, bigint_t *, char));
+bigint_t *bigint_simplify_neg(bigint_t *a, bigint_t *b, char base,
+	bigint_t *(*)(bigint_t *, bigint_t *, char));
 
 #endif //BISTRO_BISTRO_H

@@ -4,6 +4,7 @@
 
 #include "bistro.h"
 
-const char *tokens_value(const list_t *list) {
-    return ((token_t *) list->value)->value;
+const char *tokens_value(const list_t *list)
+{
+	return ((token_t *) list->value)->value;
 }
