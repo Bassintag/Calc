@@ -18,25 +18,30 @@ static int parse_operators(expr_t *out, char *str)
 	return (0);
 }
 
+static int read_expr(expr_t *expr, char *len_str) {
+	int len;
+
+	len = atoi(len_str);
+	if (len <= 0)
+		return (84);
+	expr->value = malloc(sizeof(char) * len + 1);
+	if (read(0, expr->value, (size_t) len) != len)
+		return (84);
+	expr->value[len] = '\0';
+	return (0);
+}
+
 int main(int ac, char *av[])
 {
 	expr_t expr;
 	bigint_t out;
-	int len;
 	char *err;
 
 	if (ac != 4)
 		return (84);
 	expr.base = av[1];
-	if (parse_operators(&expr, av[2]))
+	if (parse_operators(&expr, av[2]) || read_expr(&expr, av[3]))
 		return (84);
-	len = atoi(av[3]);
-	if (len <= 0)
-		return (84);
-	expr.value = malloc(sizeof(char) * len + 1);
-	if (read(0, expr.value, (size_t) len) != len)
-		return (84);
-	expr.value[len] = '\0';
 	err = calc(&expr, &out);
 	if (err) {
 		puts(err);
